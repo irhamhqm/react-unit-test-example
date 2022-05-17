@@ -1,11 +1,6 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import mockTodos from '../test/todos';
 import TodoInput from './TodoInput';
-
-const mockTodos = [
-  'bangun',
-  'mandi',
-  'sarapan'
-];
 
 describe('Todo Input', () => {
   it('should change input value on user input', () => {
