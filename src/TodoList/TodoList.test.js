@@ -1,11 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
+import mockTodos from '../test/todos';
 import TodoList from './TodoList';
-
-const mockTodos = [
-  'bangun',
-  'mandi',
-  'sarapan'
-];
 
 describe('TodoList', () => {
   it('renders todos', () => {
@@ -23,6 +18,6 @@ describe('TodoList', () => {
     render(<TodoList todos={mockTodos} />);
     const todosElement = screen.getAllByTestId(/test-todo/i);
 
-    expect(todosElement.length).toBe(3);
+    expect(todosElement.length).toBe(4);
   })
 })
