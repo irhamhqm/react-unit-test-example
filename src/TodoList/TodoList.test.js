@@ -1,10 +1,28 @@
-import { render, screen } from '@testing-library/react';
-import Header from './Header';
+import { render, screen, within } from '@testing-library/react';
+import TodoList from './TodoList';
 
-test('renders app correctly', () => {
-  render(<Header title={'test title'} />);
-  const headerElement = screen.getByText(/test title/i);
-  // const headerElement = screen.getByRole('banner', { value: /test title/i });
+const mockTodos = [
+  'bangun',
+  'mandi',
+  'sarapan'
+];
 
-  expect(headerElement).toBeInTheDocument();
-});
+describe('TodoList', () => {
+  it('renders todos', () => {
+    render(<TodoList todos={mockTodos} />);
+    const todosElement = screen.getAllByTestId(/test-todo/i);
+
+    todosElement.forEach((todo, index) => {
+      const { getByText } = within(todo);
+      const text = mockTodos[index];
+      expect(getByText(text)).toBeInTheDocument();
+    })
+  });
+
+  it('renders correct amount of todos', () => {
+    render(<TodoList todos={mockTodos} />);
+    const todosElement = screen.getAllByTestId(/test-todo/i);
+
+    expect(todosElement.length).toBe(3);
+  })
+})
