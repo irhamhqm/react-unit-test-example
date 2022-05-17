@@ -21,6 +21,18 @@ describe('App', () => {
     expect(screen.getByText(/bangun tidur/i)).toBeInTheDocument();
   });
 
+  it('input should be cleared after submit', () => {
+    render(<App />);
+    const inputElement = screen.getByPlaceholderText(/new todo/i);
+    const formElement = screen.getByRole('form');
+
+    fireEvent.change(inputElement, { target: { value: 'bangun tidur' } });
+    fireEvent.submit(formElement);
+
+    expect(inputElement.value).toBe('');
+
+  });
+
   it('add multiple todos', () => {
     render(<App />);
     addTodo(['bangun', 'mandi', 'makan']);
@@ -28,5 +40,5 @@ describe('App', () => {
     const todosElement = screen.getAllByTestId(/test-todo/i)
 
     expect(todosElement.length).toBe(3);
-  })
+  });
 });
